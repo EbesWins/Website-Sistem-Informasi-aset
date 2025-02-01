@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistem Aset</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="height: 100vh;">
+            <!-- sidebar start -->
+            <div class="col-2 col-sm-3 col-xl-2 bg-dark">
+                <nav class="navbar bg-dark border-bottom border-white mb-3 pl-0" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-white" href="#">
+                            <i class="bi bi-house-door pr-2"></i><span class="d-none d-sm-inline ms-2">Sistem Aset</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="nav flex-column">
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/dashboard">
+                        <i class="bi bi-speedometer2 pr-2"></i><span class="d-none d-sm-inline ms-2">Dashboard</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/dataMaster">
+                        <i class="bi bi-collection pr-2"></i><span class="d-none d-sm-inline ms-2">Data Master</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/kategori">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Kategori</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/merk">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Merk</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/unit">
+                        <i class="bi bi-file-earmark-arrow-down pr-2"></i><span class="d-none d-sm-inline ms-2">Unit</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/ruang">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Ruang</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/pencatatan">
+                        <i class="bi bi-clipboard2-x pr-2"></i><span class="d-none d-sm-inline ms-2">Pencatatan</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/perolehan">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Perolehan</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/riwayat">
+                        <i class="bi bi-clock-history pr-2"></i><span class="d-none d-sm-inline ms-2">Riwayat</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/akun">
+                        <i class="bi bi-user pr-2"></i><span class="d-none d-sm-inline ms-2">Akun</span>
+                    </a>
+                </nav>
+
+            </div>
+            <!-- sidebar end -->
+
+            <div class="col col-sm-9 col-xl-10 p-0 m-0">
+                <!-- navbar top start -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                    <div class="container-fluid d-flex justify-content-end p-0">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="bi bi-arrow-bar-right pr-2"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- navbar top start -->
+
+                <!-- header main start -->
+                <div class="container d-sm-flex align-items-center justify-content-between my-3">
+                    <p class="h2">Data Asset</p>
+                    <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#exampleModal1">
+                        Tambah Asset
+                    </button>
+                </div>
+                <!-- header main end -->
+
+                <!-- main content start-->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Deskripsi</th>
+                                <th>Tipe</th>
+                                <th>Spesifikasi</th>
+                                <th>Detail</th>
+                                <th>Tanggal Buat</th>
+                                <th>Terakhir Update</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.forEach((item) => { %>
+                                <tr>
+                                    <td><%= item.idMasteraset %></td>
+                                    <td><%= item.deskripsi %></td>
+                                    <td><%= item.tipe %></td>
+                                    <td><%= item.spesifikasi %></td>
+                                    <td><button type="button" class="btn btn-sm btnDetail" data-id="<%= item.idMasteraset %>" data-tipe="<%= item.tipe %>" data-desk="<%= item.deskripsi %>" data-idMerk="<%= item.idMerk %>" data-kategori="<%= item.idKategori %>" data-tglB="<%= item.tglBuat %>" data-tglU="<%= item.tglUpdate %>" data-spek="<%= item.spesifikasi %>" data-toggle="modal" data-target="#exampleModal4">lihat detail</button></td>
+                                    <td><%= item.tglBuat %></td>
+                                    <td><%= item.tglUpdate %></td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-warning btnEdit" data-id="<%= item.idMasteraset %>" data-tipe="<%= item.tipe %>" data-desk="<%= item.deskripsi %>" data-idMerk="<%= item.idMerk %>" data-kategori="<%= item.idKategori %>" data-tglB="<%= item.tglBuat %>" data-tglU="<%= item.tglUpdate %>" data-spek="<%= item.spesifikasi %>"
+                                        data-toggle="modal" data-target="#exampleModal2">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger btnHapus" data-id="<%= item.idMasteraset %>" data-toggle="modal" data-target="#exampleModal3">
+                                            Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% }) %> 
+                        </tbody>
+                    </table>
+                </div>
+                <!-- main content end-->
+
+                <!-- Modal 1-->
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header bg-dark text-white">
+                              <h5 class="modal-title" id="exampleModalLabel1">Tambah Asset</h5>
+                              <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                <div class="form-group">
+                                    <label for="spesifikasi">Spesifikasi</label>
+                                    <input type="text" class="form-control" id="spesifikasi" required> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipe">Tipe</label>
+                                    <input type="text" class="form-control" id="tipe" required> 
+                                </div>
+                                <div class="form-group">
+                                    <label for="deskripsi">Deskripsi</label>
+                                    <input type="text" class="form-control" id="deskripsi" required> 
+                                </div>
+                                
+                                  <div>
+                                    <label for="merk">Merk</label>
+                                    <select class="form-control" id="merk">
+                                        <option value="" disabled selected>Pilih Merk</option>
+                                        <% dMerk.forEach((item)=>{ %>
+                                            <option class="merkId" data-id="<%= item.idMerk %>"><%= item.nama %></option>
+                                            <%
+                                        }) %>
+                                    </select>
+                                   </div>
+                                   <div>
+                                    <label for="kategori">Kategori</label>
+                                    <select class="form-control" id="kategori">
+                                        <option value="" disabled selected>Pilih Kategori</option>
+                                        <% dKategori.forEach((item)=>{ %>
+                                            <option class ="kategoriId" data-id="<%= item.idKategori %>"><%= item.nama %></option>
+                                            <%
+                                        }) %>
+                                    </select>
+                                   </div>
+                                </div>
+                                <button type="button" id="btnTambah" class="btn btn-block btn-dark">Tambah Merk</button>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+                <!-- Modal 2-->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header bg-dark text-white">
+                                <h5 class="modal-title" id="exampleModalLabel1">Edit Asset</h5>
+                                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form>
+                                  <div class="form-group">
+                                      <label for="spesifikasiEdit">Spesifikasi</label>
+                                      <input type="text" class="form-control" id="spesifikasiEdit" required> 
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="tipeEdit">Tipe</label>
+                                      <input type="text" class="form-control" id="tipeEdit" required> 
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="deskripsiEdit">Deskripsi</label>
+                                      <input type="text" class="form-control" id="deskripsiEdit" required> 
+                                  </div>
+                                  
+                                    <div>
+                                      <label for="merkEdit">Merk</label>
+                                      <select class="form-control" id="merkEdit">
+                                          <option value="" disabled selected>Pilih Merk</option>
+                                          <% dMerk.forEach((item)=>{ %>
+                                              <option class="merkId" data-id="<%= item.idMerk %>"><%= item.nama %></option>
+                                              <%
+                                          }) %>
+                                      </select>
+                                     </div>
+                                     <div>
+                                      <label for="kategoriEdit">Kategori</label>
+                                      <select class="form-control" id="kategoriEdit">
+                                          <option value="" disabled selected>Pilih Kategori</option>
+                                          <% dKategori.forEach((item)=>{ %>
+                                              <option class ="kategoriId" data-id="<%= item.idKategori %>"><%= item.nama %></option>
+                                              <%
+                                          }) %>
+                                      </select>
+                                     </div>
+                                  </div>
+                                  <button type="button" id="editBtn" class="btn btn-block btn-dark">Edit Asset</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                
+                </div>
+
+                 <!-- Modal 3-->
+                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Apakah anda yakin ingin menghapus data ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                <button type="button" class="btn btn-danger" id="hapusBtn">Ya</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal 4-->
+                <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Detail Asset</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h1>Asset</h1>
+                                <p id="detailId"></p>
+                                <p id="detailDesk">Lorem ipsum dolor sit amet.</p>
+                                <p id="detailTipe">Lorem ipsum dolor sit.</p>
+                                <p id="detailSpek">Lorem ipsum dolor sit amet consectetur.</p>
+                                <h1>Kategori</h1>
+                                <p id="detailIdKategori"></p>
+                                <p id="detailKategori"></p>
+                                <h1>Merk</h1>
+                                <p id="detailIdmerk"></p>
+                                <p id="detailMerk"></p>
+                                <h1>Tanggal</h1>
+                                <p id="detailTglBuat"></p>
+                                <p id="detailTglEdit"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="util.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event)=>{
+        const btnTambah = document.getElementById("btnTambah");
+        const editBtn = document.getElementById("editBtn")
+        const hapusBtn = document.getElementById("hapusBtn")
+        let idMerk;
+        let id;
+        let idKategori;
+        const spekEdit = document.getElementById("spesifikasiEdit");
+        const deskEdit = document.getElementById("deskripsiEdit");
+        const tipeEdit = document.getElementById("tipeEdit");
+
+
+        document.querySelector('#merk').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#merk option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idMerk = data.getAttribute('data-id')
+                    console.log(idMerk)
+                }
+             })
+        });
+        
+        document.querySelector('#kategori').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#kategori option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idKategori = data.getAttribute('data-id')
+                    console.log(idKategori)
+                }
+             })
+        });
+
+        btnTambah.addEventListener('click', async()=>{
+            const spesifikasi = document.getElementById('spesifikasi').value
+            const deskripsi = document.getElementById('deskripsi').value
+            const tipe = document.getElementById('tipe').value
+            const url = 'http://localhost:3333/addAsset'
+            try {
+                const respone = fetch(url, {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type' : 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "tipe" : tipe,
+                        "deskripsi": deskripsi,
+                        "idKategori": idKategori,
+                        "idMerk": idMerk,
+                        "spesifikasi": spesifikasi
+                    })
+                })
+                alert('Berhasil add Asset')
+                window.location.href= "/dataMaster"
+                console.log(spesifikasi);
+                console.log(deskripsi)
+                console.log(tipe)
+            } catch (e) {
+                alert(e)
+            }
+            
+        })
+    
+        document.querySelector('#merkEdit').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#merkEdit option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idMerk = data.getAttribute('data-id')
+                    console.log(idMerk)
+                }
+             })
+        });
+        
+        document.querySelector('#kategoriEdit').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#kategoriEdit option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idKategori = data.getAttribute('data-id')
+                    console.log(idKategori)
+                }
+             })
+        });
+        
+        document.querySelectorAll('.btnEdit').forEach(edit => {
+        edit.addEventListener('click', (e) => {
+            const button = e.target;
+
+            spekEdit.value = button.getAttribute('data-spek');
+            deskEdit.value = button.getAttribute('data-desk');
+            tipeEdit.value = button.getAttribute('data-tipe');
+            id = button.getAttribute('data-id')
+            idMerk = button.getAttribute('data-idMerk');
+            idKategori = button.getAttribute('data-kategori');
+            document.querySelector(`#merkEdit [data-id="${idMerk}"]`).selected = true;
+            document.querySelector(`#kategoriEdit [data-id="${idKategori}"]`).selected = true;
+            });
+        });
+
+        document.querySelector('#merkEdit').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#merkEdit option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idMerk = data.getAttribute('data-id')
+                    console.log(idMerk)
+                }
+             })
+        });
+        
+        document.querySelector('#kategoriEdit').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#kategoriEdit option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idKategori = data.getAttribute('data-id')
+                    console.log(idKategori)
+                }
+             })
+        });
+
+        editBtn.addEventListener('click', async()=>{
+            const url = 'http://localhost:3333/editAsset'
+            try {
+                const respone = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "id" : id,
+                        "tipe" : tipeEdit.value,
+                        "deskripsi": deskEdit.value,
+                        "spesifikasi": spekEdit.value,
+                        "idKategori" : idKategori,
+                        "idMerk" : idMerk
+                    })
+                })
+                if(respone.ok){
+                    alert('Berhasil Edit Data')
+                    window.location.href ='/datamaster'
+                }else{
+                    alert('Gagal Edit Data')
+                }
+                
+            } catch (e) {
+                alert(e)
+            }
+        })
+
+        document.querySelectorAll('.btnHapus').forEach(hpus=>{
+            hpus.addEventListener('click', (e)=>{
+                id = e.target.getAttribute('data-id')
+            })
+        })
+        
+        hapusBtn.addEventListener('click', async()=>{
+            const url = 'http://localhost:3333/deleteAsset'
+            try {
+                const respone = await fetch(url, {
+                    method : 'DELETE',
+                    headers :{
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({
+                        "id": id
+                    })
+                })
+
+                if(respone.ok){
+                    alert('Berhasil Hapus Data')
+                    window.location.href = '/dataMaster'
+                }else{
+                    alert('Gagal Hapus Data')
+                }
+            } catch (e) {
+                alert(e)
+            }
+        })
+       
+        document.querySelectorAll('.btnDetail').forEach(button => {
+        button.addEventListener('click', async(e) => {
+            const button = e.target;
+
+            document.getElementById('detailId').innerText = `Id Asset : ${button.getAttribute('data-id')}`;
+            document.getElementById('detailDesk').innerText = `Deskripsi : ${button.getAttribute('data-desk')}`;
+            document.getElementById('detailTipe').innerText = `Tipe : ${button.getAttribute('data-tipe')}`;
+            document.getElementById('detailSpek').innerText = `Spesifikasi : ${button.getAttribute('data-spek')}`;
+            document.getElementById('detailIdKategori').innerText = `Id Kategori : ${button.getAttribute('data-kategori')}`;
+            idKategori = button.getAttribute('data-kategori')
+            idMerk = button.getAttribute('data-idMerk')
+            const urlMerk = `http://localhost:3333/merkId/${idMerk}`
+            const urlKategori = `http://localhost:3333/kategoriId/${idKategori}`
+            try {
+                const [merkRes, kategoriRes] = await Promise.all([
+                    fetch(urlMerk, { method: 'GET' }),
+                    fetch(urlKategori, { method: 'GET' }),
+                ]);
+
+                if (merkRes.ok && kategoriRes.ok) {
+                    const merk = await merkRes.json();
+                    const kategori = await kategoriRes.json();
+                    if (merk.length > 0 && kategori.length > 0) {
+                        const dataM = merk[0];
+                        const dataK = kategori[0];
+                        document.getElementById('detailKategori').innerText = `Nama Kategori: ${dataK.nama}`;
+                        document.getElementById('detailMerk').innerText = `Nama Merk: ${dataM.nama}`;
+                    } else {
+                        document.getElementById('detailKategori').innerText = `Data Kategori Kosong`;
+                        document.getElementById('detailMerk').innerText = `Data Merk Kosong`;
+                    }
+                } else {
+                    document.getElementById('detailKategori').innerText = `Gagal Mengambil Data Kategori`;
+                    document.getElementById('detailMerk').innerText = `Gagal Mengambil Data Merk`;
+                }
+            } catch (e) {
+                console.error(`Kesalahan: ${e.message}`);
+                document.getElementById('detailKategori').innerText = `Kesalahan Server`;
+                document.getElementById('detailMerk').innerText = `Kesalahan Server`;
+            }
+
+             
+            document.getElementById('detailIdmerk').innerText = `Id Merk : ${button.getAttribute('data-idMerk')}`;
+            document.getElementById('detailTglBuat').innerText = `Tanggal Di Buat : ${button.getAttribute('data-tglB')}`;
+            document.getElementById('detailTglEdit').innerText = `Terakhir Di Update : ${button.getAttribute('data-tglU')}`;
+        });
+    });
+
+
+    })
+    </script>
+    
+</body>
+
+</html>

@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistem Aset</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="height: 100vh;">
+            <!-- sidebar start -->
+            <div class="col-2 col-sm-3 col-xl-2 bg-dark">
+                <nav class="navbar bg-dark border-bottom border-white mb-3 pl-0" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-white" href="#">
+                            <i class="bi bi-house-door pr-2"></i><span class="d-none d-sm-inline ms-2">Sistem Aset</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="nav flex-column">
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/dashboard">
+                        <i class="bi bi-speedometer2 pr-2"></i><span class="d-none d-sm-inline ms-2">Dashboard</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/dataMaster">
+                        <i class="bi bi-collection pr-2"></i><span class="d-none d-sm-inline ms-2">Data Master</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/kategori">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Kategori</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/merk">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Merk</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/unit">
+                        <i class="bi bi-file-earmark-arrow-down pr-2"></i><span class="d-none d-sm-inline ms-2">Unit</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/ruang">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Ruang</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/pencatatan">
+                        <i class="bi bi-clipboard2-x pr-2"></i><span class="d-none d-sm-inline ms-2">Pencatatan</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/perolehan">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Perolehan</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/riwayat">
+                        <i class="bi bi-clock-history pr-2"></i><span class="d-none d-sm-inline ms-2">Riwayat</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/akun">
+                        <i class="bi bi-user pr-2"></i><span class="d-none d-sm-inline ms-2">Akun</span>
+                    </a>
+                </nav>
+
+            </div>
+            <!-- sidebar end -->
+
+            <div class="col col-sm-9 col-xl-10 p-0 m-0">
+                <!-- navbar top start -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                    <div class="container-fluid d-flex justify-content-end p-0">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="bi bi-arrow-bar-right pr-2"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- navbar top start -->
+                <div class="px-3">
+                    <!-- header main start -->
+                    <div class="container d-sm-flex align-items-center justify-content-between my-3">
+                        <p class="h2">Riwayat</p>
+                        <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#exampleModal1">
+                            Tambah Riwayat
+                        </button>
+                    </div>
+                    <!-- header main end -->
+
+                    <!-- main content start-->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Kondisi</th>
+                                <th>TglAudit</th>
+                                <th>Terakhir Update</th>
+                                <th>Detail</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.forEach((item)=> { %>
+                                <tr>
+                                    <td><%= item.idRiwayat %></td>
+                                    <td><%= item.kondisi %></td>
+                                    <td><%= item.tglAudit %></td>
+                                    <td><%= item.tglUpdate%></td>
+                                    <td>
+                                        <button type="button btnDetail" data-ruang="<%= item.idRuang %>" data-pencatatan="<%= item.idPencatatan %>" data-target="#exampleModal3" >
+                                            Detail
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-warning btnEdit" data-id="<%= item.idRiwayat %>" data-idPencatatan="<%= item.idPencatatan %>" data-idRuang="<%= item.idRuang %>" data-kondisi="<%= item.kondisi %>" data-audit="<%= item.tglAudit %>" data-toggle="modal" data-target="#exampleModal1">
+                                            Edit
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-danger btnHapus" data-id="<%= item.idRiwayat %>" data-toggle="modal" data-target="#exampleModal2">
+                                            Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="modal fade" id="exampleModal1" tabindex="-1"            aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header bg-dark text-white">
+                          <h5 class="modal-title" id="exampleModalLabel1">Kelola Pencatatan</h5>
+                          <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div>
+                              <label for="pencatatan">Kode Pencatatan</label>
+                              <input type="text" class="form-control" id="pencatatan" placeholder="Kode Pencatatan">
+                             </div>
+                             <div>
+                              <label for="ruang">Kode Ruang</label>
+                              <input type="text" class="form-control" id="ruang" placeholder="Kode Ruang"> 
+                             </div>
+                              <div class="form-group">
+                                <label for="kondisi">Kondisi</label>
+                                <select class="form-control" id="kondisi">
+                                    <option>baik</option>
+                                    <option>rusak ringan</option>
+                                    <option>rusak berat</option>
+                                    <option>hilang</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label for="audit">Tanggal Audit</label>
+                                <input type="date" class="form-control" id="audit" placeholder="audit"> 
+                              </div>
+                            <button type="button" id="btnSimpan" class="btn btn-block btn-dark">Simpan Riwayat</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Konfirmasi Hapus</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Apakah anda yakin ingin menghapus data ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                <button type="button" class="btn btn-danger" id="hapusBtn">Ya</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmDeleteModalLabel">Detail Riwayat</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h1>Riwayat</h1>
+                                <p id="id"></p>
+                                <p id="audit"></p>
+                                <p id="tglPerolehDetail"></p>
+                                <p id="statusDetail"></p>
+                                <p id="keteranganDetail"></p>
+                                <h1>Asset</h1>
+                                <p id="asetDetail"></p>
+                                <p id="namaDetail"></p>
+                                <h1>Perolehan</h1>
+                                <p id="perolehDetail"></p>
+                                <p id="namaPeroleh"></p>
+                                <h1>Tanggal</h1>
+                                <p id="tglBDetail"></p>
+                                <p id="tglUDetail"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- main content end-->
+            </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            let edit = false;
+            let id="";
+            const btnSimpan = document.getElementById('btnSimpan')
+            const btnDelete = document.getElementById('hapusBtn')
+
+            document.querySelectorAll('.btnEdit').forEach(data=>{
+                data.addEventListener('click',(e)=>{
+                    edit = true;
+                    id = e.currentTarget.getAttribute('data-id')
+                    console.log("id: "+ id)
+                    const tglPerolehFormatted = new Date(data.getAttribute('data-audit'));
+                    const tglPerolehISO = tglPerolehFormatted.toISOString().split('T')[0]; 
+                    document.getElementById('audit').value = tglPerolehISO;
+                    document.getElementById('pencatatan').value = e.target.getAttribute('data-idPencatatan')
+                    document.getElementById('ruang').value = e.target.getAttribute('data-idRuang')
+                    const kondisi = e.target.getAttribute('data-kondisi')
+                    document.querySelector(`#kondisi [value="${kondisi}"]`).selected = true;
+                })
+            })
+
+            document.querySelectorAll('.btnHapus').forEach(data=>{
+                data.addEventListener('click', (e)=>{
+                    id = e.currentTarget.getAttribute('data-id')
+                    console.log("id : "+id)
+                })
+            })
+
+            btnSimpan.addEventListener("click", async()=>{
+                const idPencatatan = document.getElementById('pencatatan').value
+                const idRuang = document.getElementById('ruang').value
+                const kondisi = document.getElementById('kondisi').value
+                const audit = document.getElementById('audit').value
+                if(edit === false){
+                    const url = 'http://localhost:3333/addRiwayat'
+                    try {
+                        const respone = await fetch(url, {
+                            method:'POST',
+                            headers:{
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                "idPencatatan": idPencatatan,
+                                "idRuang":idRuang,
+                                "kondisi":kondisi,
+                                "tglAudit":audit
+                            })
+                        })
+                        if(respone.ok){
+                            alert('Berhasil tambah data')
+                            window.location.href='/riwayat'
+                        }else{
+                            alert("Form tidak boleh kosong")
+                        }
+                    } catch (e) {
+                        alert(e)
+                    }
+                }else{
+                    const url = 'http://localhost:3333/editRiwayat'
+                    try {
+                        const respone = await fetch(url, {
+                            method:'PUT',
+                            headers:{
+                                'Content-Type':'application/json'
+                            },
+                            body:JSON.stringify({
+                                "id": id,
+                                "idPencatatan": idPencatatan,
+                                "idRuang":idRuang,
+                                "kondisi":kondisi,
+                                "tglAudit":audit
+                            })
+                        })
+                        if(respone.ok){
+                            alert("Berhasil edit data")
+                            window.location.href='/riwayat'
+                        }else{
+                            alert("Form tidak boleh kosong")
+                        }
+                    } catch (e) {
+                        alert(e)
+                    }
+                }
+            })
+        
+            btnDelete.addEventListener("click", async()=>{
+                const url = "http://localhost:3333/deleteRiwayat"
+                try {
+                    const respone = await fetch(url,{
+                        method:'DELETE',
+                        headers:{
+                            "Content-Type":"application/json"
+                        },
+                        body:JSON.stringify({
+                            "id": id
+                        })
+                    })
+                    if(respone.ok){
+                        alert("Berhasil hapus data")
+                        window.location.href="/riwayat"
+                    }
+                } catch (e) {
+                    alert("Berhasil periksa jaringan")
+                }
+            })    
+
+        })
+    </script>
+</body>
+
+</html>

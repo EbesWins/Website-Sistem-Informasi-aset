@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sistem Aset</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="height: 100vh;">
+            <!-- sidebar start -->
+            <div class="col-2 col-sm-3 col-xl-2 bg-dark">
+                <nav class="navbar bg-dark border-bottom border-white mb-3 pl-0" data-bs-theme="dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-white" href="#">
+                            <i class="bi bi-house-door pr-2"></i><span class="d-none d-sm-inline ms-2">Sistem Aset</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <nav class="nav flex-column">
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/dashboard">
+                        <i class="bi bi-speedometer2 pr-2"></i><span class="d-none d-sm-inline ms-2">Dashboard</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/dataMaster">
+                        <i class="bi bi-collection pr-2"></i><span class="d-none d-sm-inline ms-2">Data Master</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/kategori">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Kategori</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/merk">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Merk</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/unit">
+                        <i class="bi bi-file-earmark-arrow-down pr-2"></i><span class="d-none d-sm-inline ms-2">Unit</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/ruang">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Ruang</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/pencatatan">
+                        <i class="bi bi-clipboard2-x pr-2"></i><span class="d-none d-sm-inline ms-2">Pencatatan</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/perolehan">
+                        <i class="bi bi-inbox pr-2"></i><span class="d-none d-sm-inline ms-2">Perolehan</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/riwayat">
+                        <i class="bi bi-clock-history pr-2"></i><span class="d-none d-sm-inline ms-2">Riwayat</span>
+                    </a>
+                    <a class="nav-link text-white" style="white-space: nowrap;" href="/akun">
+                        <i class="bi bi-user pr-2"></i><span class="d-none d-sm-inline ms-2">Akun</span>
+                    </a>
+                </nav>
+
+            </div>
+            <!-- sidebar end -->
+
+            <div class="col col-sm-9 col-xl-10 p-0 m-0">
+                <!-- navbar top start -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                    <div class="container-fluid d-flex justify-content-end p-0">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="bi bi-arrow-bar-right pr-2"></i>Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- navbar top start -->
+
+                <!-- header main start -->
+                <div class="container d-sm-flex align-items-center justify-content-between my-3">
+                    <p class="h2">Akun</p>
+                    <button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#exampleModal1">
+                        Tambah Akun
+                    </button>
+                </div>
+                <!-- header main end -->
+
+                <!-- main content start-->
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Nama</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Tanggal Buat</th>
+                                <th>Terakhir Update</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% data.forEach((item) => { %>
+                                <tr>
+                                    <td><%= item.idAkses %></td>
+                                    <td><%= item.nama %></td>
+                                    <td><%= item.username %></td>
+                                    <td><%= item.idLevel === 'LyPiw' ? 'Admin' : 'Petugas' %></td>
+                                    <td><%= item.status %></td>
+                                    <td><%= item.tglBuat %></td>
+                                    <td><%= item.tglUpdate %></td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-warning btnEdit" data-nama="<%= item.nama %>" data-username="<%= item.username %>" data-id="<%= item.idAkses %>" data-status="<%= item.status %>" data-level="<%= item.idLevel%>" data-password="<%= item.password %>" data-toggle="modal" data-target="#exampleModal1">
+                                            Edit
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% }) %> 
+                        </tbody>
+                    </table>
+                </div>
+                <!-- main content end-->
+
+                <!-- Modal 1-->
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header bg-dark text-white">
+                              <h5 class="modal-title" id="exampleModalLabel1">Kelola Akun</h5>
+                              <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              <form>
+                                  <div class="form-group">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" class="form-control" id="nama"> 
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username"> 
+                                  </div>
+                                  <div>
+                                    <label for="password">Password</label>
+                                    <input type="text" class="form-control" id="password" placeholder="opsional untuk edit"> 
+                                  </div>
+                                  <div>
+                                    <label for="status">Status</label>
+                                    <select class="form-control" id="status">
+                                        <option value="yes">yes</option>
+                                        <option value="no">no</option>
+                                    </select>
+                                 </div>
+                                 <div>
+                                    <label for="role">Role</label>
+                                    <select class="form-control" id="role">
+                                        <option value="" disabled selected>Pilih Role</option>
+                                        <% role.forEach((item)=>{ %>
+                                            <option class="roleId" data-id="<%= item.idLevel %>"><%= item.nama %></option>
+                                            <%
+                                        }) %>
+                                    </select>
+                                 </div>
+                              </form>
+                              <button type="button" id="btnTambah" class="btn btn-block btn-dark">Simpan Akun</button>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event)=>{
+        const btnTambah = document.getElementById("btnTambah");
+        let id="";
+        let edit = false;
+        let idLevel="";
+
+        document.querySelector('#role').addEventListener('change', function() {
+             const selectedOption = document.querySelectorAll('#role option');
+             selectedOption.forEach((data)=>{
+                if(data.selected){
+                    idLevel = data.getAttribute('data-id')
+                    console.log(idLevel)
+                }
+             })
+        });
+
+        document.querySelectorAll('.btnEdit').forEach(btn =>{
+            btn.addEventListener('click', (e)=>{
+                edit = true;
+                const nama = e.currentTarget.getAttribute('data-nama')
+                idLevel = e.target.getAttribute('data-level')
+                document.querySelector(`#role [data-id="${idLevel}"]`).selected = true;
+                document.querySelector(`#status [value="${status}"]`).selected = true;
+                document.getElementById('nama') = nama
+                document.getElementById("username").value = e.currentTarget.getAttribute('data-username')
+            })
+        })
+
+        btnTambah.addEventListener('click', async () => {
+            const nama = document.getElementById("nama").value;
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const status = document.getElementById("status").value;
+
+            if(edit === false){
+                const url = 'http://localhost:3333/addUser';
+                try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "nama": nama,
+                        "password": password,
+                        "username": username,
+                        "status": status,
+                        "idLevel": idLevel
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Data berhasil ditambahkan');
+                    window.location.href = '/akun'
+                } else {
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                }
+                } catch (e) {
+                    alert(e);
+                }
+            }else{
+                const url = 'http://localhost:3333/updateUser'
+                try {
+                const response = await fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "id":id,
+                        "nama": nama,
+                        "password": password,
+                        "username": username,
+                        "status": status,
+                        "idLevel": idLevel
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Data berhasil ditambahkan');
+                    window.location.href = '/akun'
+                } else {
+                    alert('Terjadi kesalahan. Silakan coba lagi.');
+                }
+                } catch (e) {
+                    alert(e);
+                }
+            }
+            
+        });
+        
+    })
+    </script>
+    
+</body>
+
+</html>
